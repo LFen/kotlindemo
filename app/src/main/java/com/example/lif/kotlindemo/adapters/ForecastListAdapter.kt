@@ -12,14 +12,14 @@ import com.example.lif.kotlindemo.domain.DomainClasses
 class ForecastListAdapter (val weekForecastList: DomainClasses.ForecastList)
     : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
-    override fun getItemCount(): Int = weekForecastList.dailyForecast.size
+    override fun getItemCount(): Int = weekForecastList.size()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         return ViewHolder(TextView(parent?.context))
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        with(weekForecastList.dailyForecast[position]) {
+        with(weekForecastList[position]) {
             holder?.textView?.text = "$date - $description - $high/$low"
         }
     }
