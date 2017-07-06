@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.lif.kotlindemo.R
-import com.example.lif.kotlindemo.ctx
+import com.example.lif.kotlindemo.extensions.ctx
 import com.example.lif.kotlindemo.domain.DomainClasses
 import kotlinx.android.synthetic.main.item_forecast.view.*
 

@@ -1,4 +1,4 @@
-package com.example.lif.kotlindemo
+package com.example.lif.kotlindemo.extensions
 
 import android.content.Context
 import android.view.View
