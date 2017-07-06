@@ -9,7 +9,7 @@ import com.example.lif.kotlindemo.domain.DomainClasses
 
 class RequestForecastCommand(val zipCode: String): Command<DomainClasses.ForecastList> {
 
-    override fun execute(): com.example.lif.kotlindemo.domain.DomainClasses.ForecastList {
+    override fun execute(): DomainClasses.ForecastList {
         val forecastRequest = ForecastRequest(zipCode)
         return com.example.lif.kotlindemo.domain.ForecastDataMapper().convertFromDataModel(forecastRequest.execute())
     }
