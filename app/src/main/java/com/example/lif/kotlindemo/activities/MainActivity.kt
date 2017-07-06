@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.widget.TextView
 import com.example.lif.kotlindemo.adapters.ForecastListAdapter
 import com.example.lif.kotlindemo.R
-import com.example.lif.kotlindemo.adapters.ForecastListAdapter.OnItemClickListener
-import com.example.lif.kotlindemo.domain.DomainClasses
 import com.example.lif.kotlindemo.server.RequestForecastCommand
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
@@ -27,15 +25,9 @@ class MainActivity : BaseActivity() {
         weatherList.layoutManager = LinearLayoutManager(this)
 
         doAsync {
-            val result = RequestForecastCommand("020").execute()
+            val result = RequestForecastCommand("94043").execute()
             uiThread {
-                weatherList.adapter = ForecastListAdapter(result, object: OnItemClickListener{
-                    override fun invoke(forecast: DomainClasses.Forecast) {
-                        with(forecast) {
-                            toast(date)
-                        }
-                    }
-                })
+                weatherList.adapter = ForecastListAdapter(result) {forecast -> toast(forecast.date) }
             }
         }
     }
