@@ -7,7 +7,7 @@ import com.example.lif.kotlindemo.domain.DomainClasses
  * Created by lif on 2017/7/6.
  */
 
-class RequestForecastCommand(val zipCode: String): Command<DomainClasses.ForecastList> {
+class RequestForecastCommand(private val zipCode: String): Command<DomainClasses.ForecastList> {
 
     override fun execute(): DomainClasses.ForecastList {
         val forecastRequest = ForecastRequest(zipCode)
