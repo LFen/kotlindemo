@@ -9,7 +9,7 @@ import com.example.lif.kotlindemo.R
 import com.example.lif.kotlindemo.adapters.ForecastListAdapter.OnItemClickListener
 import com.example.lif.kotlindemo.domain.DomainClasses
 import com.example.lif.kotlindemo.server.RequestForecastCommand
-import org.jetbrains.anko.async
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
@@ -26,7 +26,7 @@ class MainActivity : BaseActivity() {
         val weatherList : RecyclerView = find(R.id.weather_list)  //by using Anko
         weatherList.layoutManager = LinearLayoutManager(this)
 
-        async() {
+        doAsync {
             val result = RequestForecastCommand("020").execute()
             uiThread {
                 weatherList.adapter = ForecastListAdapter(result, object: OnItemClickListener{
