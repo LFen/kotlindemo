@@ -18,9 +18,9 @@ class MainActivity : BaseActivity() {
         message.text = getString(R.string.hello)
         weatherList.layoutManager = LinearLayoutManager(this)
         doAsync {
-            val result = RequestForecastCommand("86020").execute()
+            val result = RequestForecastCommand(86020).execute()
             uiThread {
-                weatherList.adapter = ForecastListAdapter(result) {forecast -> toast(forecast.date) }
+                weatherList.adapter = ForecastListAdapter(result) {forecast -> toast(forecast.description) }
             }
         }
     }

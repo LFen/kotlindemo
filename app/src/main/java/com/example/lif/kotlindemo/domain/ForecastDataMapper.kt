@@ -11,8 +11,8 @@ import com.example.lif.kotlindemo.domain.DomainClasses.Forecast as ModelForecast
 
 class ForecastDataMapper {
 
-    fun convertFromDataModel(forecast: ResponseClasses.ForecastResult): DomainClasses.ForecastList {
-        return DomainClasses.ForecastList(forecast.city.name, forecast.city.country,
+    fun convertFromDataModel(zipCode: Long, forecast: ResponseClasses.ForecastResult): DomainClasses.ForecastList {
+        return DomainClasses.ForecastList(zipCode, forecast.city.name, forecast.city.country,
                 convertForecastListToDomain(forecast.list))
     }
 
@@ -20,8 +20,8 @@ class ForecastDataMapper {
         return list.map { convertForecastItemToDomain(it) }
     }
 
-    private fun convertForecastItemToDomain(forecast: ResponseClasses.Forecast): DomainClasses.Forecast {
-        return DomainClasses.Forecast(converData(forecast.dt), forecast.weather[0].description,
+    private fun convertForecastItemToDomain(forecast: ResponseClasses.Forecast) = with(forecast) {
+        DomainClasses.Forecast(dt, forecast.weather[0].description,
                 forecast.temp.max.toInt(), forecast.temp.min.toInt(), generateIconUrl(forecast.weather[0].icon))
     }
 
