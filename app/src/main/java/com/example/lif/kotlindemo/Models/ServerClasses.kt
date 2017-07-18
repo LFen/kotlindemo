@@ -4,7 +4,7 @@ package com.example.lif.kotlindemo.Models
  * Created by lif on 2017/7/6.
  */
 
-open class ResponseClasses {
+open class ServerClasses {
 
     data class ForecastResult(val city: City, val list: List<Forecast>)
 

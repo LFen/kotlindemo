@@ -1,6 +1,6 @@
 package com.example.lif.kotlindemo.domain
 
-import com.example.lif.kotlindemo.Models.ResponseClasses
+import com.example.lif.kotlindemo.Models.ServerClasses
 import java.text.DateFormat
 import java.util.*
 import com.example.lif.kotlindemo.domain.DomainClasses.Forecast as ModelForecast
@@ -9,18 +9,18 @@ import com.example.lif.kotlindemo.domain.DomainClasses.Forecast as ModelForecast
  * Created by lif on 2017/7/6.
  */
 
-class ForecastDataMapper {
+class ServerDataMapper {
 
-    fun convertFromDataModel(zipCode: Long, forecast: ResponseClasses.ForecastResult): DomainClasses.ForecastList {
+    fun convertFromDataModel(zipCode: Long, forecast: ServerClasses.ForecastResult): DomainClasses.ForecastList {
         return DomainClasses.ForecastList(zipCode, forecast.city.name, forecast.city.country,
                 convertForecastListToDomain(forecast.list))
     }
 
-    private fun convertForecastListToDomain(list: List<ResponseClasses.Forecast>): List<DomainClasses.Forecast> {
+    private fun convertForecastListToDomain(list: List<ServerClasses.Forecast>): List<DomainClasses.Forecast> {
         return list.map { convertForecastItemToDomain(it) }
     }
 
-    private fun convertForecastItemToDomain(forecast: ResponseClasses.Forecast) = with(forecast) {
+    private fun convertForecastItemToDomain(forecast: ServerClasses.Forecast) = with(forecast) {
         DomainClasses.Forecast(dt, forecast.weather[0].description,
                 forecast.temp.max.toInt(), forecast.temp.min.toInt(), generateIconUrl(forecast.weather[0].icon))
     }
