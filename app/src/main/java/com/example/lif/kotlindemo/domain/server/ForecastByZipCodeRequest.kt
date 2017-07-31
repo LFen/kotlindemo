@@ -1,4 +1,4 @@
-package com.example.lif.kotlindemo.server
+package com.example.lif.kotlindemo.domain.server
 
 import com.example.lif.kotlindemo.Models.ServerClasses
 import com.google.gson.Gson
@@ -8,7 +8,7 @@ import java.net.URL
  * Created by lif on 2017/7/5.
  */
 
-class ForecastByZipCodeRequest(val zipCode: Long) {
+class ForecastByZipCodeRequest(val zipCode: Long, val gson: Gson = Gson()) {
 
     companion object {
         private val APP_ID = "15646a06818f61f7b8d7823ca833e1ce"
@@ -19,6 +19,6 @@ class ForecastByZipCodeRequest(val zipCode: Long) {
 
     fun execute(): ServerClasses.ForecastResult {
         val forecastJsonStr = URL(COMPLETE_URL + zipCode).readText()
-        return Gson().fromJson(forecastJsonStr, ServerClasses.ForecastResult::class.java)
+        return gson.fromJson(forecastJsonStr, ServerClasses.ForecastResult::class.java)
     }
 }

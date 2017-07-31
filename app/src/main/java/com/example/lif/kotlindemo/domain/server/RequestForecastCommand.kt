@@ -1,4 +1,4 @@
-package com.example.lif.kotlindemo.server
+package com.example.lif.kotlindemo.domain.server
 
 import com.example.lif.kotlindemo.domain.Command
 import com.example.lif.kotlindemo.domain.DomainClasses

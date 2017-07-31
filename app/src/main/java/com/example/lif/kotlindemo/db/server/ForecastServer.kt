@@ -4,7 +4,7 @@ import com.example.lif.kotlindemo.db.ForecastDb
 import com.example.lif.kotlindemo.domain.DomainClasses
 import com.example.lif.kotlindemo.domain.ServerDataMapper
 import com.example.lif.kotlindemo.domain.datasource.ForecastDataSource
-import com.example.lif.kotlindemo.server.ForecastByZipCodeRequest
+import com.example.lif.kotlindemo.domain.server.ForecastByZipCodeRequest
 
 /**
  * Created by lif on 2017/7/18.

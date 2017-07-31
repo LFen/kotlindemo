@@ -26,12 +26,12 @@ class ForecastDbHelper(ctx: Context = App.instance): ManagedSQLiteOpenHelper(ctx
 
         db?.createTable(DayForecastTable.NAME, true,
                 DayForecastTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-                DayForecastTable.CITY_ID to INTEGER,
-                DayForecastTable.DATE to TEXT,
+                DayForecastTable.DATE to INTEGER,
                 DayForecastTable.DESCRIPTION to TEXT,
                 DayForecastTable.HIGH to INTEGER,
                 DayForecastTable.LOW to INTEGER,
-                DayForecastTable.ICON_URL to TEXT)
+                DayForecastTable.ICON_URL to TEXT,
+                DayForecastTable.CITY_ID to INTEGER)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

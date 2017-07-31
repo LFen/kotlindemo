@@ -12,7 +12,7 @@ class ForecastProvider(val source: List<ForecastDataSource> = ForecastProvider.S
 
     companion object {
         val DAY_IN_MILLIS = 1000 * 60 * 60 * 24
-        val SOURCES = listOf(ForecastServer(), ForecastDb())
+        val SOURCES = listOf(ForecastDb(), ForecastServer())
     }
 
     fun requestByZipCode(zipCode: Long, days: Int): DomainClasses.ForecastList
