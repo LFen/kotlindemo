@@ -8,7 +8,7 @@ import com.example.lif.kotlindemo.extensions.firstResult
 /**
  * Created by lif on 2017/7/18.
  */
-class ForecastProvider(val source: List<ForecastDataSource> = ForecastProvider.SOURCES) {
+class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.SOURCES) {
 
     companion object {
         val DAY_IN_MILLIS = 1000 * 60 * 60 * 24
@@ -16,7 +16,7 @@ class ForecastProvider(val source: List<ForecastDataSource> = ForecastProvider.S
     }
 
     fun requestByZipCode(zipCode: Long, days: Int): DomainClasses.ForecastList
-            = source.firstResult { requestSource(it, zipCode, days) }
+            = sources.firstResult { requestSource(it, zipCode, days) }
 
     private fun requestSource(source: ForecastDataSource, zipCode: Long, days: Int): DomainClasses.ForecastList? {
         val res = source.requestForecastByZipCode(zipCode, todayTimeSpan())
