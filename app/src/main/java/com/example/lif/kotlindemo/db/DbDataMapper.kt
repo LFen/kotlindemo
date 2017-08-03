@@ -22,7 +22,7 @@ class DbDataMapper {
         DomainClasses.ForecastList(_id, city, country, daily)
     }
 
-    private fun convertDayToDomain(dayForecast: DayForecast) = with(dayForecast) {
-        DomainClasses.Forecast(date, description, high, low, iconUrl)
+    fun convertDayToDomain(dayForecast: DayForecast) = with(dayForecast) {
+        DomainClasses.Forecast(_id, date, description, high, low, iconUrl)
     }
 }

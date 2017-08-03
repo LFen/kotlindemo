@@ -8,4 +8,5 @@ import com.example.lif.kotlindemo.domain.DomainClasses
 interface ForecastDataSource {
 
     fun requestForecastByZipCode(zipCode: Long, date: Long): DomainClasses.ForecastList?
+    fun requestDayForecast(id: Long): DomainClasses.Forecast?
 }

@@ -11,6 +11,7 @@ import com.example.lif.kotlindemo.domain.server.ForecastByZipCodeRequest
  */
 class ForecastServer(val dataMapper: ServerDataMapper = ServerDataMapper(),
                      val forecastDb: ForecastDb = ForecastDb()): ForecastDataSource {
+    override fun requestDayForecast(id: Long): DomainClasses.Forecast? = throw UnsupportedOperationException()
 
     override fun requestForecastByZipCode(zipCode: Long, date: Long): DomainClasses.ForecastList? {
         val result = ForecastByZipCodeRequest(zipCode).execute()

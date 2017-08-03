@@ -2,10 +2,7 @@ package com.example.lif.kotlindemo.db
 
 import com.example.lif.kotlindemo.domain.DomainClasses
 import com.example.lif.kotlindemo.domain.datasource.ForecastDataSource
-import com.example.lif.kotlindemo.extensions.clear
-import com.example.lif.kotlindemo.extensions.parseList
-import com.example.lif.kotlindemo.extensions.parseOpt
-import com.example.lif.kotlindemo.extensions.toVarargArray
+import com.example.lif.kotlindemo.extensions.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
@@ -15,6 +12,11 @@ import org.jetbrains.anko.db.select
 
 class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
                  val dbDataMapper: DbDataMapper = DbDataMapper()): ForecastDataSource {
+
+    override fun requestDayForecast(id: Long): DomainClasses.Forecast? = forecastDbHelper.use {
+        val forecast = select(DayForecastTable.NAME).byId(id).parseOpt { DayForecast(HashMap(it)) }
+        if (forecast != null) dbDataMapper.convertDayToDomain(forecast) else null
+    }
 
     override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"

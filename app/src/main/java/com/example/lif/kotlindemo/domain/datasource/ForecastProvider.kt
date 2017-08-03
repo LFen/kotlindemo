@@ -16,12 +16,14 @@ class ForecastProvider(val sources: List<ForecastDataSource> = ForecastProvider.
     }
 
     fun requestByZipCode(zipCode: Long, days: Int): DomainClasses.ForecastList
-            = sources.firstResult { requestSource(it, zipCode, days) }
-
-    private fun requestSource(source: ForecastDataSource, zipCode: Long, days: Int): DomainClasses.ForecastList? {
-        val res = source.requestForecastByZipCode(zipCode, todayTimeSpan())
-        return if (res != null && res.size() >= days) res else null
+            = requestToSources {
+        val res = it.requestForecastByZipCode(zipCode, todayTimeSpan())
+        if (res != null && res.size() >= days) res else null
     }
 
+    fun requestForecast(id: Long): DomainClasses.Forecast = requestToSources { it.requestDayForecast(id) }
+
     private fun todayTimeSpan() = System.currentTimeMillis() / DAY_IN_MILLIS * DAY_IN_MILLIS
+
+    private fun <T : Any> requestToSources(f: (ForecastDataSource) -> T?): T = sources.firstResult { f(it) }
 }
