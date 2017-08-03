@@ -9,6 +9,7 @@ import com.example.lif.kotlindemo.extensions.ctx
 import com.example.lif.kotlindemo.extensions.slideEnter
 import com.example.lif.kotlindemo.extensions.slideExit
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.startActivity
 
 /**
  * Created by lif on 2017/8/3.
@@ -23,9 +24,9 @@ interface ToolbarManager {
     fun initToolbar() {
         toolbar.inflateMenu(R.menu.menu_main)
         toolbar.setOnMenuItemClickListener{
-            when(it.itemId) {
-                R.id.action_settings -> App.instance.toast("Settings")
-                else -> App.instance.toast("Unknown options")
+            when (it.itemId) {
+                R.id.action_settings -> toolbar.ctx.startActivity<SettingsActivity>()
+                else -> App.instance.toast("Unknown option")
             }
             true
         }
