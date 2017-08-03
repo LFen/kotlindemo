@@ -1,6 +1,7 @@
 package com.example.lif.kotlindemo.activities
 
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.lif.kotlindemo.R
@@ -12,6 +13,7 @@ import com.example.lif.kotlindemo.extensions.toDateString
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 import java.text.DateFormat
 
@@ -19,7 +21,8 @@ import java.text.DateFormat
  * Created by lif on 2017/8/3.
  */
 
-class DetailActivity: BaseActivity() {
+class DetailActivity: BaseActivity(), ToolbarManager {
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
 
     companion object {
         val ID = "DetailActivity:id"
@@ -30,7 +33,9 @@ class DetailActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        title = intent.getStringExtra(CITY_NAME)
+        initToolbar()
+        toolbarTitle = intent.getStringExtra(CITY_NAME)
+        enableHomeAsUp { onBackPressed() }
 
         doAsync {
             val result = RequestDayForecastCommand(intent.getLongExtra(ID, -1)).execute()
